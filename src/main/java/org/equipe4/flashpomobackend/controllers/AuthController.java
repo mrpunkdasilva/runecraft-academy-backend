@@ -19,7 +19,6 @@ import java.util.Optional;
 /**
  * The AuthController class is a REST controller that handles authentication-related operations.
  * It provides endpoints for user login and registration.
- *
  */
 @RestController
 @RequestMapping("/auth")
@@ -30,6 +29,24 @@ public class AuthController {
     private final TokenService tokenService;
 
 
+    /**
+     * Handles the login request.
+     * It finds the user by the provided email, checks the password, and generates a JWT token if the user is authenticated.
+     *
+     * @param body the login request body containing the email and password
+     * @return a ResponseEntity containing the user's name and the generated token, or a Bad Request response if the authentication fails
+     */
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody LoginRequestDTO body) {
+        User user = this.repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("Could not find repositoryUser not Found"));
+
+        if (passwordEncoder.matches(body.password(), user.getPassword())) {
+            String token = this.tokenService.generateToken(user);
+            return ResponseEntity.ok(new ResponseDTO(user.getName(), token));
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
 
     /**
      * Handles the registration request.
