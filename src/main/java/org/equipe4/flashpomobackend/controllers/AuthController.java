@@ -1,0 +1,58 @@
+package org.equipe4.flashpomobackend.controllers;
+
+import lombok.RequiredArgsConstructor;
+import org.equipe4.flashpomobackend.dao.LoginRequestDTO;
+import org.equipe4.flashpomobackend.dao.RegisterRequestDTO;
+import org.equipe4.flashpomobackend.dao.ResponseDTO;
+import org.equipe4.flashpomobackend.infra.security.TokenService;
+import org.equipe4.flashpomobackend.models.User;
+import org.equipe4.flashpomobackend.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
+
+/**
+ * The AuthController class is a REST controller that handles authentication-related operations.
+ * It provides endpoints for user login and registration.
+ *
+ */
+@RestController
+@RequestMapping("/auth")
+@RequiredArgsConstructor
+public class AuthController {
+    private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
+    private final TokenService tokenService;
+
+
+
+    /**
+     * Handles the registration request.
+     * It checks if the email is already registered, and if not, creates a new user and generates a JWT token.
+     *
+     * @param body the registration request body containing the name, email, and password
+     * @return a ResponseEntity containing the user's name and the generated token, or a Bad Request response if the email is already registered
+     */
+    @PostMapping("/register")
+    public ResponseEntity register(@RequestBody RegisterRequestDTO body) {
+        Optional<User> user = this.repository.findByEmail(body.email());
+
+        if (user.isEmpty()) {
+            User newUser = new User();
+            newUser.setPassword(passwordEncoder.encode(body.password()));
+            newUser.setEmail(body.email());
+            newUser.setName(body.name());
+            this.repository.save(newUser);
+
+            String token = this.tokenService.generateToken(newUser);
+            return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+}
