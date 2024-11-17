@@ -2,19 +2,20 @@ package org.equipe4.flashpomobackend.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.security.Timestamp;
+import org.hibernate.annotations.ColumnDefault;
 
 /**
  * The User class represents a user entity in the application.
  * It is annotated with Lombok annotations for generating getters, setters, constructors, and other boilerplate code.
  * The class is also annotated as an entity, indicating that it maps to a database table.
+ *
  */
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "USER")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     /**
      * The unique identifier of the user, which is the primary key.
@@ -28,49 +29,51 @@ public class User {
     /**
      * The name of the user.
      */
-    @Column(name = "NAME", length = 200)
+    @Column(name = "NAME")
     private String name;
 
     /**
      * The password of the user.
      */
-    @Column(name = "PASSWORD", length = 90)
+    @Column(name = "PASSWORD")
     private String password;
 
     /**
-     * The email address of the user, which is unique.
+     * The email address of the user.
      */
-    @Column(name = "EMAIL", length = 150, unique = true)
+    @Column(name = "EMAIL")
     private String email;
 
     /**
-     * The role of the user, such as "admin" or "user".
+     * The role of the user, defaults to 'CLIENT'.
      */
-    @Column(name = "ROLE", length = 10)
+    @Column(name = "ROLE")
+    @ColumnDefault("'CLIENT'")
     private String role;
 
     /**
-     * The avatar image of the user, stored as a byte array.
+     * The avatar image of the user.
      */
-    @Lob
     @Column(name = "AVATAR")
     private byte[] avatar;
 
     /**
-     * The timestamp when the user was created.
+     * The date and time when the user was created.
      */
     @Column(name = "CREATED_AT")
-    private Timestamp createdAt;
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    private String createdAt;
 
     /**
-     * The timestamp when the user was last updated.
+     * The date and time when the user was last updated.
      */
     @Column(name = "UPDATED_AT")
-    private Timestamp updatedAt;
+    private String updatedAt;
 
     /**
-     * The status of the user, indicating whether the user is active or not.
+     * The status of the user, defaults to true.
      */
     @Column(name = "STATUS")
+    @ColumnDefault("true")
     private boolean status;
 }
