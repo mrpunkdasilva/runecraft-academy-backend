@@ -3,6 +3,10 @@ package org.equipe4.flashpomobackend.models;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.sql.Timestamp;
 
 /**
  * The User class represents a user entity in the application.
@@ -48,7 +52,6 @@ public class User {
      * The role of the user, defaults to 'CLIENT'.
      */
     @Column(name = "ROLE")
-    @ColumnDefault("'CLIENT'")
     private String role;
 
     /**
@@ -60,20 +63,20 @@ public class User {
     /**
      * The date and time when the user was created.
      */
+    @CreationTimestamp
     @Column(name = "CREATED_AT")
-    @ColumnDefault("CURRENT_TIMESTAMP")
     private String createdAt;
 
     /**
      * The date and time when the user was last updated.
      */
-    @Column(name = "UPDATED_AT")
+    @UpdateTimestamp
     private String updatedAt;
 
     /**
      * The status of the user, defaults to true.
      */
     @Column(name = "STATUS")
-    @ColumnDefault("true")
+    @ColumnDefault("1")
     private boolean status;
 }

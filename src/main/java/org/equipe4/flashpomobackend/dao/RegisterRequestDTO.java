@@ -7,15 +7,15 @@ package org.equipe4.flashpomobackend.dao;
  *
  * @author Your Name
  */
-public record RegisterRequestDTO(String name, String email, String password, byte[] avatar) {
-    /**
-     * Constructs a RegisterRequestDTO instance without the avatar field.
-     *
-     * @param name     the name of the user
-     * @param email    the email of the user
-     * @param password the password of the user
-     */
-    public RegisterRequestDTO(String name, String email, String password) {
-        this(name, email, password, null);
+public record RegisterRequestDTO(String name, String email, String password, byte[] avatar, String createdAt, boolean status,  String role) {
+
+    public RegisterRequestDTO(String name, String email, String password, byte[] avatar, String createdAt, boolean status, String role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.createdAt = createdAt;
+        this.status = true;
+        this.role = "client";
     }
 }

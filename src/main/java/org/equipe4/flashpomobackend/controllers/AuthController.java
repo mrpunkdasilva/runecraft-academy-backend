@@ -9,10 +9,7 @@ import org.equipe4.flashpomobackend.models.User;
 import org.equipe4.flashpomobackend.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -27,7 +24,6 @@ public class AuthController {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
-
 
     /**
      * Handles the login request.
@@ -59,17 +55,24 @@ public class AuthController {
     public ResponseEntity register(@RequestBody RegisterRequestDTO body) {
         Optional<User> user = this.repository.findByEmail(body.email());
 
+
         if (user.isEmpty()) {
             User newUser = new User();
-            newUser.setPassword(passwordEncoder.encode(body.password()));
-            newUser.setEmail(body.email());
+
             newUser.setName(body.name());
+            newUser.setEmail(body.email());
+            newUser.setPassword(passwordEncoder.encode(body.password()));
+            newUser.setAvatar(body.avatar());
+            newUser.setCreatedAt(body.createdAt());
+            newUser.setStatus(body.status());
+            newUser.setRole(body.role());
+
             this.repository.save(newUser);
 
             String token = this.tokenService.generateToken(newUser);
             return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
         }
 
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Erro ao registrar o usuário.");
     }
 }
