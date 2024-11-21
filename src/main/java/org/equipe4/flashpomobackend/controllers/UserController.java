@@ -6,11 +6,10 @@ import org.equipe4.flashpomobackend.dao.UserEditRequestDTO;
 import org.equipe4.flashpomobackend.models.User;
 import org.equipe4.flashpomobackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -108,5 +107,46 @@ public class UserController {
                 updatedUser.getAvatar(),
                 updatedUser.getRole()
         ));
+    }
+
+    /**
+     * Deletes a user by setting their status to false.
+     * <p>
+     * This method handles the DELETE request to deactivate a user account. It doesn't actually
+     * remove the user from the database but instead sets their status to false, effectively
+     * deactivating the account.
+     *
+     * @param userId The unique identifier of the user to be deleted. Must be a positive number.
+     * @return A ResponseEntity containing a ResponseCommonDTO with a success or error message.
+     * Possible responses:
+     * - 200 OK with "User deleted with success" message if the user was successfully deactivated.
+     * - 400 Bad Request with "User ID is required" message if the userId is null, non-positive, or invalid.
+     * - 404 Not Found with "User not found" message if no user with the given ID exists.
+     * - 500 Internal Server Error with an error message if an exception occurs during the deletion process.
+     */
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<ResponseCommonDTO> deleteUser(@PathVariable("userId") Long userId) {
+        try {
+            if (userId == null || userId <= 0) {
+                ResponseEntity.ok().body(new ResponseCommonDTO("User ID is required"));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.ok().body(new ResponseCommonDTO("User ID is required"));
+        }
+
+        Optional<User> user = this.userRepository.findById(Math.toIntExact(userId));
+        boolean userNotFound = user.isEmpty();
+        if (userNotFound) {
+            return ResponseEntity.status(404).body(new ResponseCommonDTO("User not found"));
+        }
+
+        try {
+            User deletedUser = user.get();
+            deletedUser.setStatus(false);
+            this.userRepository.save(deletedUser);
+            return ResponseEntity.ok().body(new ResponseCommonDTO("User deleted with success"));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new ResponseCommonDTO("An error occurred while deleting the user"));
+        }
     }
 }
