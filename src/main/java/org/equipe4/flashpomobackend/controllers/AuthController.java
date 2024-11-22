@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.equipe4.flashpomobackend.dao.LoginRequestDTO;
 import org.equipe4.flashpomobackend.dao.LoginResponseDTO;
 import org.equipe4.flashpomobackend.dao.RegisterRequestDTO;
-import org.equipe4.flashpomobackend.dao.ResponseDTO;
+import org.equipe4.flashpomobackend.dao.ResponseCommonDTO;
 import org.equipe4.flashpomobackend.infra.security.TokenService;
 import org.equipe4.flashpomobackend.models.User;
 import org.equipe4.flashpomobackend.repository.UserRepository;
