@@ -1,12 +1,16 @@
 package org.equipe4.flashpomobackend.controllers;
 
-import org.equipe4.flashpomobackend.dao.*;
+import org.equipe4.flashpomobackend.dao.IUser;
+import org.equipe4.flashpomobackend.dao.ResponseCommonDTO;
+import org.equipe4.flashpomobackend.dao.ResponseUserEditDTO;
+import org.equipe4.flashpomobackend.dao.UserEditRequestDTO;
 import org.equipe4.flashpomobackend.models.User;
 import org.equipe4.flashpomobackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
