@@ -2,8 +2,9 @@ package org.equipe4.flashpomobackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.equipe4.flashpomobackend.dao.LoginRequestDTO;
+import org.equipe4.flashpomobackend.dao.LoginResponseDTO;
 import org.equipe4.flashpomobackend.dao.RegisterRequestDTO;
-import org.equipe4.flashpomobackend.dao.ResponseDTO;
+import org.equipe4.flashpomobackend.dao.ResponseCommonDTO;
 import org.equipe4.flashpomobackend.infra.security.TokenService;
 import org.equipe4.flashpomobackend.models.User;
 import org.equipe4.flashpomobackend.repository.UserRepository;
@@ -34,11 +35,11 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
-        User user = this.repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("Could not find repositoryUser not Found"));
+        User user = this.repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("Could not find user"));
 
         if (passwordEncoder.matches(body.password(), user.getPassword())) {
             String token = this.tokenService.generateToken(user);
-            return ResponseEntity.ok(new ResponseDTO(user.getName(), token));
+                return ResponseEntity.ok(new LoginResponseDTO(user.getName(), token, user.getUserId()));
         }
 
         return ResponseEntity.badRequest().build();
@@ -70,7 +71,7 @@ public class AuthController {
             this.repository.save(newUser);
 
             String token = this.tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
+            return ResponseEntity.ok(new ResponseCommonDTO("User created"));
         }
 
         return ResponseEntity.badRequest().body("Erro ao registrar o usuário.");

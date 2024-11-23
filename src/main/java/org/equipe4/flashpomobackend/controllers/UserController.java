@@ -1,15 +1,13 @@
 package org.equipe4.flashpomobackend.controllers;
 
-import org.equipe4.flashpomobackend.dao.IUser;
-import org.equipe4.flashpomobackend.dao.ResponseCommonDTO;
-import org.equipe4.flashpomobackend.dao.ResponseUserEditDTO;
-import org.equipe4.flashpomobackend.dao.UserEditRequestDTO;
+import org.equipe4.flashpomobackend.dao.*;
 import org.equipe4.flashpomobackend.models.User;
 import org.equipe4.flashpomobackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +31,7 @@ public class UserController {
      */
     @GetMapping
     public List<User> getUser() {
-        return this.userRepository.findAll();
+        return (List<User>) this.userRepository.findAll();
     }
 
     /**
@@ -128,7 +126,7 @@ public class UserController {
     public ResponseEntity<ResponseCommonDTO> deleteUser(@PathVariable("userId") Long userId) {
         try {
             if (userId == null || userId <= 0) {
-                ResponseEntity.ok().body(new ResponseCommonDTO("User ID is required"));
+                return ResponseEntity.ok().body(new ResponseCommonDTO("User ID is required"));
             }
         } catch (Exception e) {
             return ResponseEntity.ok().body(new ResponseCommonDTO("User ID is required"));
@@ -147,6 +145,29 @@ public class UserController {
             return ResponseEntity.ok().body(new ResponseCommonDTO("User deleted with success"));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new ResponseCommonDTO("An error occurred while deleting the user"));
+        }
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<GetByIdResponse> getById(@PathVariable("userId") Long userId) {
+        try {
+            if (userId == null || userId <= 0) {
+                return ResponseEntity.ok().body(new GetByIdResponse("User ID is required", ""));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.ok().body(new GetByIdResponse("User ID is required", ""));
+        }
+
+        Optional<User> user = this.userRepository.findById(Math.toIntExact(userId));
+        boolean userNotFound = user.isEmpty();
+        if (userNotFound) {
+            return ResponseEntity.status(404).body(new GetByIdResponse("User not found", ""));
+        }
+
+        try {
+            return ResponseEntity.ok().body(new GetByIdResponse(user.get().getName(), user.get().getEmail()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new GetByIdResponse("An error occurred while get user", ""));
         }
     }
 }
