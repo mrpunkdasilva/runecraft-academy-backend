@@ -1,12 +1,14 @@
 package org.equipe4.flashpomobackend.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.equipe4.flashpomobackend.dao.FlashcardRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value="/flashcards")
+@RequestMapping(value="/flashcard")
+@RequiredArgsConstructor
 public class FlashcardController {
 
 //    @Autowired
