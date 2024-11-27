@@ -2,6 +2,9 @@ package org.equipe4.flashpomobackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.equipe4.flashpomobackend.dao.EnsembleRequestDTO;
+import org.equipe4.flashpomobackend.dao.EnsembleResponseDTO;
+import org.equipe4.flashpomobackend.dao.ResponseCommonDTO;
+import org.equipe4.flashpomobackend.models.Ensemble;
 import org.equipe4.flashpomobackend.repository.EnsembleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * Controller class for handling Ensemble-related HTTP requests.
  */
 @RestController
-@RequestMapping(value="/ensemble")
+@RequestMapping(value = "/ensemble")
 @RequiredArgsConstructor
 public class EnsembleController {
 
@@ -30,7 +33,7 @@ public class EnsembleController {
     }
 
 
-     /**
+    /**
      * Retrieves a specific ensemble by its ID.
      *
      * @param ensembleId the ID of the ensemble to retrieve
@@ -50,15 +53,42 @@ public class EnsembleController {
      */
     @PostMapping("/")
     public ResponseEntity createEnsemble(@RequestBody EnsembleRequestDTO body) {
-        return ResponseEntity.ok().build();
+        // Verificações
+        if (body.name().isBlank()) {
+            return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field name is required"));
+        }
+        if (body.description().isBlank()) {
+            return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field description is required"));
+        }
+        if (body.user().getUserId() == null || body.user().getUserId() <= 0) {
+            return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field userId is required"));
+        }
+
+        // Salvar o ensemble no repositório
+        try {
+            Ensemble ensemble = Ensemble.builder()
+                    .name(body.name())
+                    .description(body.description())
+                    .user(body.user())
+                    .build();
+            this.ensembleRepository.save(ensemble);
+
+            return ResponseEntity.ok().body(new EnsembleResponseDTO(
+                    body.name(),
+                    body.description(),
+                    body.user().getUserId()
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new ResponseCommonDTO("An error occurred while creating the ensemble"));
+        }
     }
 
 
-     /**
+    /**
      * Updates an existing ensemble.
      *
      * @param ensembleId the ID of the ensemble to update
-     * @param body the EnsembleRequestDTO containing the updated ensemble data
+     * @param body       the EnsembleRequestDTO containing the updated ensemble data
      * @return ResponseEntity containing the updated ensemble or an appropriate status code
      */
     @PutMapping("/{ensembleId}")

@@ -1,4 +1,6 @@
 package org.equipe4.flashpomobackend.dao;
 
-public record EnsembleRequestDTO(Long ensembleId, String name, String description) {
+import org.equipe4.flashpomobackend.models.User;
+
+public record EnsembleRequestDTO(Long ensembleId, String name, String description, User user) {
 }
