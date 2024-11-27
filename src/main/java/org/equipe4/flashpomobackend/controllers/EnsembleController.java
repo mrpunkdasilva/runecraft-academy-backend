@@ -1,5 +1,10 @@
 package org.equipe4.flashpomobackend.controllers;
 
+<<<<<<< HEAD
+=======
+
+import lombok.RequiredArgsConstructor;
+>>>>>>> origin/developer
 import org.equipe4.flashpomobackend.dao.EnsembleRequestDTO;
 import org.equipe4.flashpomobackend.repository.EnsembleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(value="/ensemble")
+@RequiredArgsConstructor
 public class EnsembleController {
 
     @Autowired

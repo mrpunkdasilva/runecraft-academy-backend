@@ -1,5 +1,6 @@
 package org.equipe4.flashpomobackend.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.equipe4.flashpomobackend.dao.FlashcardRequestDTO;
 import org.equipe4.flashpomobackend.repository.FlashcardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
  * It uses Spring MVC annotations to map HTTP requests to specific methods.
  */
 @RestController
-@RequestMapping(value="/flashcards")
+@RequestMapping(value="/flashcard")
+@RequiredArgsConstructor
 public class FlashcardController {
 
     @Autowired
