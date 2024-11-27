@@ -1,6 +1,7 @@
 package org.equipe4.flashpomobackend.controllers;
 
 
+import lombok.RequiredArgsConstructor;
 import org.equipe4.flashpomobackend.dao.EnsembleRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value="/ensemble")
+@RequiredArgsConstructor
 public class EnsembleController {
 
 //    @Autowired
