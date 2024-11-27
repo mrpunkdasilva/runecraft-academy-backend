@@ -1,7 +1,8 @@
 package org.equipe4.flashpomobackend.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.equipe4.flashpomobackend.dao.PurschaseRequestDTO;
+import org.equipe4.flashpomobackend.dao.PurchaseRequestDTO;
+import org.equipe4.flashpomobackend.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PurschaseController {
 
-//    @Autowired
-//    private PurschaseRepository purschaseRepository;
+    @Autowired
+    private PurchaseRepository purchaseRepository;
 
     // PEGAR TODAS AS COMPRAS
     @GetMapping("/")
@@ -29,13 +30,13 @@ public class PurschaseController {
 
     // CRIAR UMA COMPRA
     @PostMapping("/{purchaseId}")
-    public ResponseEntity createPurchase(@PathVariable Long purchaseId, @RequestBody PurschaseRequestDTO body) {
+    public ResponseEntity createPurchase(@PathVariable Long purchaseId, @RequestBody PurchaseRequestDTO body) {
         return ResponseEntity.ok().build();
     }
 
     // EDITAR UMA COMPRA
     @PutMapping("/{purchaseId}")
-    public ResponseEntity updatePurchase(@PathVariable Long purchaseId, @RequestBody PurschaseRequestDTO body) {
+    public ResponseEntity updatePurchase(@PathVariable Long purchaseId, @RequestBody PurchaseRequestDTO body) {
         return ResponseEntity.ok().build();
     }
 
