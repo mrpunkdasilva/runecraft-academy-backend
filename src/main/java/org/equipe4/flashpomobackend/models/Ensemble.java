@@ -38,4 +38,13 @@ public class Ensemble {
     @Lob
     @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] cover;
+
+
+    /**
+     * The user who owns the box.
+     * This is a many-to-one relationship, where one user can own multiple ensembles.
+     */
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
 }
