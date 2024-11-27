@@ -8,11 +8,12 @@ import lombok.*;
  * It is annotated with Lombok annotations for generating getters, setters, constructors, and other boilerplate code.
  * The class is also annotated as an entity, indicating that it maps to a database table.
  */
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "ENSEMBLE")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ensemble {
     /**
      * The unique identifier of the ensemble, which is the primary key.
@@ -20,7 +21,7 @@ public class Ensemble {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+        private Long id;
 
     /**
      * The name of the ensemble.
