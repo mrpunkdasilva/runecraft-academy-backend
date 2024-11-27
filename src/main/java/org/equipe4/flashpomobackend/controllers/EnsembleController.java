@@ -2,6 +2,7 @@ package org.equipe4.flashpomobackend.controllers;
 
 
 import org.equipe4.flashpomobackend.dao.EnsembleRequestDTO;
+import org.equipe4.flashpomobackend.repository.EnsembleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value="/ensemble")
 public class EnsembleController {
 
-//    @Autowired
-//    private EnsembleRepository ensembleRepository;
+    @Autowired
+    private EnsembleRepository ensembleRepository;
 
     // PEGAR OS ENSEMBLES
     @GetMapping("/")
