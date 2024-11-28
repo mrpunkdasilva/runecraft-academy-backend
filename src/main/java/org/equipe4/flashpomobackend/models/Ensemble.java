@@ -2,6 +2,8 @@ package org.equipe4.flashpomobackend.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DialectOverride;
+import org.hibernate.annotations.Where;
 
 /**
  * The Ensemble class represents an ensemble entity in the application.
@@ -14,6 +16,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Where(clause = "status = true")
 public class Ensemble {
     /**
      * The unique identifier of the ensemble, which is the primary key.
@@ -48,4 +51,6 @@ public class Ensemble {
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    private boolean status;
 }
