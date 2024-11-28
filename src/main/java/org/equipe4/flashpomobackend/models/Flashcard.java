@@ -2,18 +2,20 @@ package org.equipe4.flashpomobackend.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
+import org.hibernate.annotations.Where;
 
 /**
  * The Flashcard class represents a flashcard entity in the application.
  * It is annotated with Lombok annotations for generating getters, setters, constructors, and other boilerplate code.
  * The class is also annotated as an entity, indicating that it maps to a database table.
  */
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "FLASHCARD")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Where(clause = "status = true")
 public class Flashcard {
     /**
      * The unique identifier of the flashcard, which is the primary key.
@@ -40,13 +42,13 @@ public class Flashcard {
      * The timestamp when the flashcard was created.
      */
     @Column(name = "CREATED_AT")
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     /**
      * The timestamp when the flashcard was last updated.
      */
     @Column(name = "UPDATED_AT")
-    private LocalDateTime updatedAt;
+    private String updatedAt;
 
     /**
      * The ensemble that the flashcard belongs to.
@@ -55,4 +57,6 @@ public class Flashcard {
     @ManyToOne
     @JoinColumn(name = "ENSEMBLE_ID")
     private Ensemble ensemble;
+
+    private boolean status;
 }
