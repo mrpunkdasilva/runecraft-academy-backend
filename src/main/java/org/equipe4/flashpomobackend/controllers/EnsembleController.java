@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 /**
  * Controller class for handling Ensemble-related HTTP requests.
  */
@@ -28,8 +32,8 @@ public class EnsembleController {
      * @return ResponseEntity containing a list of all ensembles or an appropriate status code
      */
     @GetMapping("/")
-    public ResponseEntity getAllEnsembles() {
-        return ResponseEntity.ok().build();
+    public List<Ensemble> getAllEnsembles() {
+        return this.ensembleRepository.findAll();
     }
 
 
@@ -41,7 +45,17 @@ public class EnsembleController {
      */
     @GetMapping("/{ensembleId}")
     public ResponseEntity getEnsembleById(@PathVariable Long ensembleId) {
-        return ResponseEntity.ok().build();
+        Optional<Ensemble> ensemble = Optional.ofNullable(this.ensembleRepository.findById(ensembleId).orElse(null));
+
+        if (ensemble.isPresent()) {
+            return ResponseEntity.ok().body(new EnsembleResponseDTO(
+                    ensemble.get().getName(),
+                    ensemble.get().getDescription(),
+                    ensemble.get().getUser().getUserId()
+            ));
+        }
+
+        return ResponseEntity.status(404).body(new ResponseCommonDTO("Ensemble not found"));
     }
 
 
@@ -66,11 +80,10 @@ public class EnsembleController {
 
         // Salvar o ensemble no repositório
         try {
-            Ensemble ensemble = Ensemble.builder()
-                    .name(body.name())
-                    .description(body.description())
-                    .user(body.user())
-                    .build();
+            Ensemble ensemble = new Ensemble();
+            ensemble.setName(body.name());
+            ensemble.setDescription(body.description());
+            ensemble.setUser(body.user());
             this.ensembleRepository.save(ensemble);
 
             return ResponseEntity.ok().body(new EnsembleResponseDTO(
