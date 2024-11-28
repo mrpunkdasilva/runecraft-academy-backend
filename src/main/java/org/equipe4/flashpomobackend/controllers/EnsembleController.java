@@ -5,12 +5,13 @@ import org.equipe4.flashpomobackend.dao.EnsembleRequestDTO;
 import org.equipe4.flashpomobackend.dao.EnsembleResponseDTO;
 import org.equipe4.flashpomobackend.dao.ResponseCommonDTO;
 import org.equipe4.flashpomobackend.models.Ensemble;
+import org.equipe4.flashpomobackend.models.User;
 import org.equipe4.flashpomobackend.repository.EnsembleRepository;
+import org.equipe4.flashpomobackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,8 @@ public class EnsembleController {
 
     @Autowired
     private EnsembleRepository ensembleRepository;
-
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * Retrieves all ensembles.
@@ -74,7 +76,7 @@ public class EnsembleController {
         if (body.description().isBlank()) {
             return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field description is required"));
         }
-        if (body.user().getUserId() == null || body.user().getUserId() <= 0) {
+        if (body.userId() <= 0) {
             return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field userId is required"));
         }
 
@@ -83,13 +85,20 @@ public class EnsembleController {
             Ensemble ensemble = new Ensemble();
             ensemble.setName(body.name());
             ensemble.setDescription(body.description());
-            ensemble.setUser(body.user());
+
+            Optional<User> user = this.userRepository.findById(body.userId());
+            if (user.isEmpty()) {
+                return ResponseEntity.badRequest().body(new ResponseCommonDTO("User not found"));
+            }
+            ensemble.setUser(user.get());
+
+            ensemble.setStatus(true);
             this.ensembleRepository.save(ensemble);
 
             return ResponseEntity.ok().body(new EnsembleResponseDTO(
                     body.name(),
                     body.description(),
-                    body.user().getUserId()
+                    body.userId()
             ));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(new ResponseCommonDTO("An error occurred while creating the ensemble"));
@@ -106,7 +115,40 @@ public class EnsembleController {
      */
     @PutMapping("/{ensembleId}")
     public ResponseEntity updateEnsemble(@PathVariable("ensembleId") Long ensembleId, @RequestBody EnsembleRequestDTO body) {
-        return ResponseEntity.ok().build();
+        Optional<Ensemble> ensemble = Optional.ofNullable(this.ensembleRepository.findById(ensembleId).orElse(null));
+
+        if (ensemble.isPresent()) {
+            // Verificações
+            if (body.name().isBlank()) {
+                return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field name is required"));
+            }
+            if (body.description().isBlank()) {
+                return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field description is required"));
+            }
+            if (body.userId() <= 0) {
+                return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field userId is required"));
+            }
+
+            // Atualizar o ensemble no repositório
+            ensemble.get().setName(body.name());
+            ensemble.get().setDescription(body.description());
+
+            Optional<User> user = this.userRepository.findById(body.userId());
+            if (user.isPresent()) {
+                ensemble.get().setUser(user.get());
+                ensemble.get().setStatus(true);
+                this.ensembleRepository.save(ensemble.get());
+
+                return ResponseEntity.ok().body(new EnsembleResponseDTO(
+                        body.name(),
+                        body.description(),
+                        body.userId()
+                ));
+            }
+            return ResponseEntity.badRequest().body(new ResponseCommonDTO("User not found"));
+        }
+
+        return ResponseEntity.status(404).body(new ResponseCommonDTO("Ensemble not found"));
     }
 
 
@@ -118,6 +160,19 @@ public class EnsembleController {
      */
     @DeleteMapping("/{ensembleId}")
     public ResponseEntity deleteEnsemble(@PathVariable("ensembleId") Long ensembleId) {
-        return ResponseEntity.ok().build();
+        // VERIFICAÇÕES
+        if (ensembleId <= 0) {
+            return ResponseEntity.badRequest().body(new ResponseCommonDTO("Invalid ensemble ID"));
+        }
+
+        Optional<Ensemble> ensemble = Optional.ofNullable(this.ensembleRepository.findById(ensembleId).orElse(null));
+
+        if (ensemble.isPresent()) {
+            ensemble.get().setStatus(false);
+            this.ensembleRepository.save(ensemble.get());
+            return ResponseEntity.ok().body(new ResponseCommonDTO("Ensemble deleted"));
+        }
+
+        return ResponseEntity.status(404).body(new ResponseCommonDTO("Ensemble not found"));
     }
 }
