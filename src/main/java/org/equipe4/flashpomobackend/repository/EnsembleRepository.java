@@ -14,6 +14,5 @@ import java.util.Optional;
  * @param <Integer> the type of the entity's primary key, in this case, Integer
  */
 public interface EnsembleRepository extends JpaRepository<Ensemble, Integer> {
-
-    Optional<Ensemble> findById(Long ensembleId);
+    Optional<Ensemble> findById(Integer ensembleId);
 }

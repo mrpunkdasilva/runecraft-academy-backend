@@ -2,6 +2,7 @@ package org.equipe4.flashpomobackend.repository;
 
 import org.equipe4.flashpomobackend.models.Flashcard;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,8 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@Repository
 public interface FlashcardRepository extends JpaRepository<Flashcard, Integer> {
-    Optional<Object> findById(Long intExact);
-     List<Flashcard> findByEnsemble(Long ensemble);
+    Optional<Flashcard> findById(Integer id);
+     List<Flashcard> findByEnsembleId(Integer ensemble);
 }
