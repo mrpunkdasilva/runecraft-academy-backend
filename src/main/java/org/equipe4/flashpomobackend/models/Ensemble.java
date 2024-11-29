@@ -24,7 +24,7 @@ public class Ensemble {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+        private Integer id;
 
     /**
      * The name of the ensemble.

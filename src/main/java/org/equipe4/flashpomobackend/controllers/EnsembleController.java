@@ -46,7 +46,7 @@ public class EnsembleController {
      * @return ResponseEntity containing the requested ensemble or an appropriate status code
      */
     @GetMapping("/{ensembleId}")
-    public ResponseEntity getEnsembleById(@PathVariable Long ensembleId) {
+    public ResponseEntity getEnsembleById(@PathVariable Integer ensembleId) {
         Optional<Ensemble> ensemble = Optional.ofNullable(this.ensembleRepository.findById(ensembleId).orElse(null));
 
         if (ensemble.isPresent()) {
@@ -114,7 +114,7 @@ public class EnsembleController {
      * @return ResponseEntity containing the updated ensemble or an appropriate status code
      */
     @PutMapping("/{ensembleId}")
-    public ResponseEntity updateEnsemble(@PathVariable("ensembleId") Long ensembleId, @RequestBody EnsembleRequestDTO body) {
+    public ResponseEntity updateEnsemble(@PathVariable("ensembleId") Integer ensembleId, @RequestBody EnsembleRequestDTO body) {
         Optional<Ensemble> ensemble = Optional.ofNullable(this.ensembleRepository.findById(ensembleId).orElse(null));
 
         if (ensemble.isPresent()) {
@@ -159,7 +159,7 @@ public class EnsembleController {
      * @return ResponseEntity with an appropriate status code indicating the result of the deletion
      */
     @DeleteMapping("/{ensembleId}")
-    public ResponseEntity deleteEnsemble(@PathVariable("ensembleId") Long ensembleId) {
+    public ResponseEntity deleteEnsemble(@PathVariable("ensembleId") Integer ensembleId) {
         // VERIFICAÇÕES
         if (ensembleId <= 0) {
             return ResponseEntity.badRequest().body(new ResponseCommonDTO("Invalid ensemble ID"));

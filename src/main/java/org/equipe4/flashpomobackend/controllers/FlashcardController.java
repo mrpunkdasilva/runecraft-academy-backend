@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.equipe4.flashpomobackend.dao.*;
 import org.equipe4.flashpomobackend.models.Ensemble;
 import org.equipe4.flashpomobackend.models.Flashcard;
-import org.equipe4.flashpomobackend.models.User;
 import org.equipe4.flashpomobackend.repository.EnsembleRepository;
 import org.equipe4.flashpomobackend.repository.FlashcardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +63,8 @@ public class FlashcardController {
     }
 
     @GetMapping("/ensemble/{ensemble}")
-    public List<Flashcard> getEnsembleById(@PathVariable Long ensemble) {
-        return this.flashcardRepository.findByEnsemble(ensemble);
+    public List<Flashcard> getEnsembleById(@PathVariable Integer ensemble) {
+        return this.flashcardRepository.findByEnsembleId(ensemble);
     }
 
 
@@ -124,12 +123,12 @@ public class FlashcardController {
     /**
      * Updates an existing Flashcard in the database.
      *
-     * @param flashcard The updated Flashcard data.
+     * @param body The updated Flashcard data.
      * @param flashcardId The ID of the Flashcard to update.
      * @return A ResponseEntity with status 200 (OK) if successful.
      */
     @PutMapping("/{flashcardId}")
-    public ResponseEntity updateFlashcard(@RequestBody FlashcardRequestEditDTO body, @PathVariable Long flashcardId){
+    public ResponseEntity updateFlashcard(@RequestBody FlashcardRequestEditDTO body, @PathVariable Integer flashcardId){
 
     Optional<Flashcard> flashcard = Optional.ofNullable((Flashcard) this.flashcardRepository.findById(flashcardId).orElse(null));
 
@@ -187,7 +186,7 @@ public class FlashcardController {
      * @return A ResponseEntity with status 200 (OK) if successful.
      */
     @DeleteMapping("/{flashcardId}")
-    public ResponseEntity deleteFlashcard(@PathVariable("flashcard") Long flashcardId){
+    public ResponseEntity deleteFlashcard(@PathVariable("flashcard") Integer flashcardId){
 
          // VERIFICAÇÕES
         if (flashcardId <= 0) {
