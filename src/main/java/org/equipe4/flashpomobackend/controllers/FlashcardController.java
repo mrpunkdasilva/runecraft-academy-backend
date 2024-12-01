@@ -147,9 +147,6 @@ public class FlashcardController {
             if (body.ensembleId() <= 0) {
                 return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field userId is required"));
             }
-            if (body.status()) {
-                return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field status is required"));
-            }
 
             // Atualizar o flashcard no repositório
             flashcard.get().setTitle(body.title());
@@ -186,14 +183,14 @@ public class FlashcardController {
      * @return A ResponseEntity with status 200 (OK) if successful.
      */
     @DeleteMapping("/{flashcardId}")
-    public ResponseEntity deleteFlashcard(@PathVariable("flashcard") Integer flashcardId){
+    public ResponseEntity deleteFlashcard(@PathVariable("flashcardId") Integer flashcardId){
 
          // VERIFICAÇÕES
         if (flashcardId <= 0) {
             return ResponseEntity.badRequest().body(new ResponseCommonDTO("Invalid ensemble ID"));
         }
 
-        Optional<Flashcard> flashcard = Optional.ofNullable((Flashcard) this.flashcardRepository.findById(flashcardId).orElse(null));
+        Optional<Flashcard> flashcard = Optional.ofNullable(this.flashcardRepository.findById(flashcardId).orElse(null));
 
         if (flashcard.isPresent()) {
             flashcard.get().setStatus(false);
