@@ -187,7 +187,7 @@ public class FlashcardController {
 
          // VERIFICAÇÕES
         if (flashcardId <= 0) {
-            return ResponseEntity.badRequest().body(new ResponseCommonDTO("Invalid ensemble ID"));
+            return ResponseEntity.badRequest().body(new ResponseCommonDTO("Invalid flashcard ID"));
         }
 
         Optional<Flashcard> flashcard = Optional.ofNullable(this.flashcardRepository.findById(flashcardId).orElse(null));
