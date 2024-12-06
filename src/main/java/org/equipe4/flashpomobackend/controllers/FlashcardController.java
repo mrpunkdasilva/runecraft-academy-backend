@@ -161,7 +161,7 @@ public class FlashcardController {
 
             flashcard.get().setEnsemble(ensemble.get());
             ensemble.get().setStatus(true);
-            this.ensembleRepository.save(ensemble.get());
+            this.flashcardRepository.save(flashcard.get());
 
             return ResponseEntity.ok().body(new FlashcardResponseDTO(
                     flashcard.get().getFlashcardId(),
