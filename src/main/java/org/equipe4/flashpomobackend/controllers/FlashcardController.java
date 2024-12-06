@@ -166,9 +166,9 @@ public class FlashcardController {
             return ResponseEntity.ok().body(new FlashcardResponseDTO(
                     flashcard.get().getFlashcardId(),
                     body.title(),
-                    body.updatedAt(),
                     body.content(),
                     body.createdAt(),
+                    body.updatedAt(),
                     body.ensembleId()
                 ));
         }
