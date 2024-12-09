@@ -46,13 +46,13 @@ public class UserController {
      * Otherwise, an OK response with the updated user information is returned.
      */
     @PutMapping("/{userId}")
-    public ResponseEntity<ResponseUserEditDTO> editUser(@PathVariable("userId") Long userId, @RequestBody UserEditRequestDTO body) {
+    public ResponseEntity editUser(@PathVariable("userId") Long userId, @RequestBody UserEditRequestDTO body) {
         try {
             if (userId == null || userId <= 0) {
-                return ResponseEntity.badRequest().body(new ResponseUserEditDTO("User ID is required", null, null, null, null));
+                return ResponseEntity.badRequest().body(new ResponseCommonDTO("User ID is required"));
             }
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ResponseUserEditDTO("User ID is not a number", null, null, null, null));
+            return ResponseEntity.badRequest().body(new ResponseCommonDTO("User ID is not a number"));
         }
         Optional<User> user = this.userRepository.findById(Math.toIntExact(userId));
 
@@ -68,7 +68,7 @@ public class UserController {
         if (fieldValueFilled) {
             newUser.setUpdatedAt(body.updatedAt());
         } else {
-            return ResponseEntity.badRequest().body(new ResponseUserEditDTO("Field 'updatedAt' if required", null, null, null, null));
+            return ResponseEntity.badRequest().body(new ResponseCommonDTO("Field 'updatedAt' if required"));
         }
 
         fieldValueFilled = !body.name().isBlank();
@@ -76,29 +76,10 @@ public class UserController {
             newUser.setName(body.name());
         }
 
-        fieldValueFilled = !body.email().isBlank();
-        if (fieldValueFilled) {
-            newUser.setEmail(body.email());
-        }
-
-        fieldValueFilled = !body.password().isBlank();
-        if (fieldValueFilled) {
-            newUser.setPassword(body.password());
-        }
-
-        fieldValueFilled = body.avatar() != null;
-        if (fieldValueFilled) {
-            newUser.setAvatar(body.avatar());
-        }
-
-        fieldValueFilled = !body.role().isBlank();
-        if (fieldValueFilled) {
-            newUser.setRole(body.role());
-        }
-
         User updatedUser = this.userRepository.save(newUser);
 
         return ResponseEntity.ok().body(new ResponseUserEditDTO(
+                updatedUser.getUserId(),
                 updatedUser.getName(),
                 updatedUser.getEmail(),
                 updatedUser.getPassword(),
@@ -148,6 +129,16 @@ public class UserController {
         }
     }
 
+    /**
+     * Retrieves a user's information by their unique identifier.
+     *
+     * @param userId The unique identifier of the user to be retrieved. Must be a positive number.
+     * @return A ResponseEntity containing a GetByIdResponse object.
+     * - If the user ID is null, non-positive, or invalid, a 200 OK response with a GetByIdResponse containing the message "User ID is required" and an empty email.
+     * - If no user with the given ID exists, a 404 Not Found response with a GetByIdResponse containing the message "User not found" and an empty email.
+     * - If an exception occurs during the retrieval process, a 500 Internal Server Error response with a GetByIdResponse containing the message "An error occurred while get user" and an empty email.
+     * - Otherwise, a 200 OK response with a GetByIdResponse containing the user's name and email.
+     */
     @GetMapping("/{userId}")
     public ResponseEntity<GetByIdResponse> getById(@PathVariable("userId") Long userId) {
         try {
