@@ -19,10 +19,16 @@
 
 <!-- TOC -->
 * [Flash Pomo Backend](#flash-pomo-backend)
+  * [Table of Contents](#table-of-contents)
   * [Sobre o Projeto](#sobre-o-projeto)
     * [Objetivos](#objetivos)
+  * [Funcionalidades e Demonstração](#funcionalidades-e-demonstração)
+    * [Usuário](#usuário)
+    * [Ensemble](#ensemble)
+    * [Flashcards](#flashcards)
   * [Tecnologias Utilizadas](#tecnologias-utilizadas)
   * [Configuração do Ambiente](#configuração-do-ambiente)
+  * [Desenvolvedores](#desenvolvedores)
 <!-- TOC -->
 
 ---
@@ -45,75 +51,6 @@ O objetivo deste relatório é documentar a criação, o desenvolvimento e o fun
 um software voltado para o contexto acadêmico, abrangendo suas etapas de concepção,
 implementação, modelagem e sua aplicabilidade no ambiente de estudos.
 
-## Funcionalidades e Demonstração
-
-> Como usar o Insominia para testar os endpoints 
-> ![](./.gitlab/demo/usar-insominia.mp4)
-
-### Usuário
-- Cadastrar
-![](./.gitlab/demo/auth/auth-2.mp4)
-
-- Fazer login
-![](./.gitlab/demo/auth/auth-1.mp4)
-
-- Deletar conta
-![](./.gitlab/demo/user/user-4.mp4)
-
-- Editar conta
-![](./.gitlab/demo/user/user-3.mp4)
-
-- Retornar todos os usuários
-![](./.gitlab/demo/user/user-2.mp4)
-
-- Retornar um usuário por ID
-![](./.gitlab/demo/user/user-1.mp4)
-
-### Ensemble
-- Criar um ensemble
-![](./.gitlab/demo/ensemble/ensemble-6.mp4)
-
-- Editar um ensemble
-![](./.gitlab/demo/ensemble/ensemble-5.mp4)
-
-- Deletar um ensemble
-![](./.gitlab/demo/ensemble/ensemble-4.mp4)
-
-- Editar um ensemble
-![](./.gitlab/demo/ensemble/ensemble-3.mp4)
-
-- Retornar todos os ensembles cadastrados
-![](./.gitlab/demo/ensemble/ensemble-2.mp4)
-
-- Retornar um ensemble por ID
-![](./.gitlab/demo/ensemble/ensemble-1.mp4)
-
-
-### Flashcards
-- Criar um flashcard
-![](./.gitlab/demo/flashcard/flashcard-5.mp4)
-
-- Editar um flashcard
-![](./.gitlab/demo/flashcard/flashcard-2.mp4)
-
-- Deletar um flashcard
-![](./.gitlab/demo/flashcard/flashcard-1.mp4)
-
-- Retornar todos os flashcards cadastrados
-![](./.gitlab/demo/flashcard/flashcard-4.mp4)
-
-- Retornar um flashcard por ID
-![](./.gitlab/demo/flashcard/flashcard-3.mp4)
-
-
-
----
-## Tecnologias Utilizadas
-
-- Java
-- Spring Boot
-- Spring Security
-- Spring Data JPA
 - MySQL
 - Lombok
 
@@ -148,6 +85,98 @@ spring.jpa.hibernate.ddl-auto=update
 ```
 ./mvnw spring-boot:run
 ```
+
+
+---
+
+## Funcionalidades e Demonstração
+
+> Como usar o Insominia para testar os endpoints 
+> ![](./.gitlab/demo/usar-insominia.mp4)
+
+### Usuário
+- Cadastrar
+
+![](./.gitlab/demo/auth/auth-2.mp4)
+
+- Fazer login
+
+![](./.gitlab/demo/auth/auth-1.mp4)
+
+
+- Deletar conta
+
+![](./.gitlab/demo/user/user-4.mp4)
+
+- Editar conta
+
+![](./.gitlab/demo/user/user-3.mp4)
+
+- Retornar todos os usuários
+
+![](./.gitlab/demo/user/user-2.mp4)
+
+- Retornar um usuário por ID
+
+![](./.gitlab/demo/user/user-1.mp4)
+
+### Ensemble
+- Criar um ensemble
+
+![](./.gitlab/demo/ensemble/ensemble-6.mp4)
+
+- Editar um ensemble
+
+![](./.gitlab/demo/ensemble/ensemble-5.mp4)
+
+- Deletar um ensemble
+
+![](./.gitlab/demo/ensemble/ensemble-4.mp4)
+
+- Editar um ensemble
+
+![](./.gitlab/demo/ensemble/ensemble-3.mp4)
+
+- Retornar todos os ensembles cadastrados
+
+![](./.gitlab/demo/ensemble/ensemble-2.mp4)
+
+- Retornar um ensemble por ID
+
+![](./.gitlab/demo/ensemble/ensemble-1.mp4)
+
+
+### Flashcards
+- Criar um flashcard
+
+![](./.gitlab/demo/flashcard/flashcard-5.mp4)
+
+- Editar um flashcard
+
+![](./.gitlab/demo/flashcard/flashcard-2.mp4)
+
+- Deletar um flashcard
+
+![](./.gitlab/demo/flashcard/flashcard-1.mp4)
+
+- Retornar todos os flashcards cadastrados
+
+![](./.gitlab/demo/flashcard/flashcard-4.mp4)
+
+- Retornar um flashcard por ID
+
+![](./.gitlab/demo/flashcard/flashcard-3.mp4)
+
+
+
+---
+## Tecnologias Utilizadas
+
+- Java
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+
 ---
 ## Desenvolvedores
 
