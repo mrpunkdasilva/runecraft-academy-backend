@@ -28,8 +28,8 @@
         </toc-element>
         <toc-element topic="GET_purchase.md"/>
         <toc-element topic="DELETE_purchase_purchaseId_.md"/>
-        <toc-element topic="PUT_purchase_purchaseId_.md"/>
         <toc-element topic="POST_purchase_purchaseId_.md"/>
+        <toc-element topic="PUT_purchase_purchaseId_.md"/>
         <toc-element topic="GET_purchase_purchaseId_.md"/>
         <toc-element topic="GET_pomodoro_story.md"/>
         <toc-element topic="POST_pomodoro_story_pomodoroStoryId_.md"/>
