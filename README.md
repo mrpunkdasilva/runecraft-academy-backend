@@ -1,5 +1,7 @@
 # Flash Pomo Backend
 
+![](.gitlab/flashpomo-no-bg.png)
+
 ```
  ███████████ ████                    █████         ███████████                                   
 ░░███░░░░░░█░░███                   ░░███         ░░███░░░░░███                                  
@@ -25,6 +27,8 @@
 
 ---
 
+>![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+
 ## Sobre o Projeto
 
 O aplicativo desenvolvido é voltado para o meio acadêmico, combinando as estratégias de
@@ -41,22 +45,63 @@ O objetivo deste relatório é documentar a criação, o desenvolvimento e o fun
 um software voltado para o contexto acadêmico, abrangendo suas etapas de concepção,
 implementação, modelagem e sua aplicabilidade no ambiente de estudos.
 
+## Funcionalidades e Demonstração
+
+### Usuário
+- Criar conta
+
+- Cadastrar
+
+- Fazer login
+
+- Deletar conta
+
+- Editar conta
+
+- Retornar todos os usuários
+
+- Retornar um usuário por ID
+
+### Ensemble
+- Criar um ensemble
+
+- Editar um ensemble
+
+- Deletar um ensemble
+
+- Retornar todos os ensembles cadastrados
+
+- Retornar um ensemble por ID
+
+### Flashcards
+- Criar um flashcard
+
+- Editar um flashcard
+
+- Deletar um flashcard
+
+- Retornar todos os flashcards cadastrados
+
+- Retornar um flashcard por ID
+
+---
 ## Tecnologias Utilizadas
 
-- Java 11
+- Java
 - Spring Boot
 - Spring Security
 - Spring Data JPA
 - MySQL
 - Lombok
 
+---
 ## Configuração do Ambiente
 
 1. Certifique-se de ter o Java 11 e o Maven instalados em sua máquina.
 2. Instale e configure o MySQL em sua máquina.
 3. Clone o repositório do projeto:
 
-```
+```git
 git clone https://gitlab.com/jala-university1/cohort-4/oficial-pt-desenvolvimento-de-software-1-iso-115/se-o-c/equipe-4/flash-pomo-backend.git
 ```
 
@@ -68,7 +113,7 @@ cd flash-pomo-backend
 
 5. Crie um arquivo `application.properties` na pasta `src/main/resources` e configure as seguintes propriedades:
 
-```
+``` springdataql
 spring.datasource.url=jdbc:postgresql://localhost:5432/flash_pomo
 spring.datasource.username=seu_usuario
 spring.datasource.password=sua_senha
@@ -80,3 +125,10 @@ spring.jpa.hibernate.ddl-auto=update
 ```
 ./mvnw spring-boot:run
 ```
+---
+## Desenvolvedores
+
+- Rinaldo Lira de Albuquerque Lima 
+- Rhuan Esteves
+- David Souza Santos
+- Gustavo Jesus da Silva
