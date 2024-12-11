@@ -1,93 +1,186 @@
-# flash-pomo-frontend
+# Flash Pomo Backend
 
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+![](.gitlab/flashpomo-no-bg.png)
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/jala-university1/cohort-4/oficial-pt-desenvolvimento-de-software-1-iso-115/se-o-c/equipe-4/flash-pomo-frontend.git
-git branch -M main
-git push -uf origin main
+ ███████████ ████                    █████         ███████████                                   
+░░███░░░░░░█░░███                   ░░███         ░░███░░░░░███                                  
+ ░███   █ ░  ░███   ██████    █████  ░███████      ░███    ░███  ██████  █████████████    ██████ 
+ ░███████    ░███  ░░░░░███  ███░░   ░███░░███     ░██████████  ███░░███░░███░░███░░███  ███░░███
+ ░███░░░█    ░███   ███████ ░░█████  ░███ ░███     ░███░░░░░░  ░███ ░███ ░███ ░███ ░███ ░███ ░███
+ ░███  ░     ░███  ███░░███  ░░░░███ ░███ ░███     ░███        ░███ ░███ ░███ ░███ ░███ ░███ ░███
+ █████       █████░░████████ ██████  ████ █████    █████       ░░██████  █████░███ █████░░██████ 
+░░░░░       ░░░░░  ░░░░░░░░ ░░░░░░  ░░░░ ░░░░░    ░░░░░         ░░░░░░  ░░░░░ ░░░ ░░░░░  ░░░░░░ 
 ```
 
-## Integrate with your tools
+---
 
-- [ ] [Set up project integrations](https://gitlab.com/jala-university1/cohort-4/oficial-pt-desenvolvimento-de-software-1-iso-115/se-o-c/equipe-4/flash-pomo-frontend/-/settings/integrations)
+## Table of Contents
 
-## Collaborate with your team
+<!-- TOC -->
+* [Flash Pomo Backend](#flash-pomo-backend)
+  * [Table of Contents](#table-of-contents)
+  * [Sobre o Projeto](#sobre-o-projeto)
+    * [Objetivos](#objetivos)
+  * [Funcionalidades e Demonstração](#funcionalidades-e-demonstração)
+    * [Usuário](#usuário)
+    * [Ensemble](#ensemble)
+    * [Flashcards](#flashcards)
+  * [Tecnologias Utilizadas](#tecnologias-utilizadas)
+  * [Configuração do Ambiente](#configuração-do-ambiente)
+  * [Desenvolvedores](#desenvolvedores)
+<!-- TOC -->
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+---
 
-## Test and Deploy
+>![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
-Use the built-in continuous integration in GitLab.
+## Sobre o Projeto
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+O aplicativo desenvolvido é voltado para o meio acadêmico, combinando as estratégias de
+estudo Pomodoro e Flashcards em um único hub. Ele oferece funcionalidades que permitem a
+criação e edição de flashcards, além de gerenciar o tempo de estudo de forma eficiente através da
+técnica Pomodoro.
+Além disso, o aplicativo conta com funcionalidades de mercado, onde os usuários podem
+negociar seus flashcards usando uma moeda própria da aplicação. Essa integração de ferramentas
+proporciona um ambiente de aprendizado dinâmico e interativo, favorecendo o desenvolvimento
+acadêmico e a troca de conhecimento entre os usuários.
 
-***
+### Objetivos
+O objetivo deste relatório é documentar a criação, o desenvolvimento e o funcionamento de
+um software voltado para o contexto acadêmico, abrangendo suas etapas de concepção,
+implementação, modelagem e sua aplicabilidade no ambiente de estudos.
 
-# Editing this README
+- MySQL
+- Lombok
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+---
+## Configuração do Ambiente
 
-## Suggestions for a good README
+1. Certifique-se de ter o Java 11 e o Maven instalados em sua máquina.
+2. Instale e configure o MySQL em sua máquina.
+3. Clone o repositório do projeto:
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+```git
+git clone https://gitlab.com/jala-university1/cohort-4/oficial-pt-desenvolvimento-de-software-1-iso-115/se-o-c/equipe-4/flash-pomo-backend.git
+```
 
-## Name
-Choose a self-explaining name for your project.
+4. Acesse o diretório do projeto:
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+```
+cd flash-pomo-backend
+```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+5. Crie um arquivo `application.properties` na pasta `src/main/resources` e configure as seguintes propriedades:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+``` springdataql
+spring.datasource.url=jdbc:postgresql://localhost:5432/flash_pomo
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+spring.jpa.hibernate.ddl-auto=update
+```
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+6. Compile e execute o projeto:
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+```
+./mvnw spring-boot:run
+```
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+---
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## Funcionalidades e Demonstração
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+> Como usar o Insominia para testar os endpoints 
+> ![](./.gitlab/demo/usar-insominia.mp4)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+### Usuário
+- Cadastrar
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+![](./.gitlab/demo/auth/auth-2.mp4)
 
-## License
-For open source projects, say how it is licensed.
+- Fazer login
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+![](./.gitlab/demo/auth/auth-1.mp4)
+
+
+- Deletar conta
+
+![](./.gitlab/demo/user/user-4.mp4)
+
+- Editar conta
+
+![](./.gitlab/demo/user/user-3.mp4)
+
+- Retornar todos os usuários
+
+![](./.gitlab/demo/user/user-2.mp4)
+
+- Retornar um usuário por ID
+
+![](./.gitlab/demo/user/user-1.mp4)
+
+### Ensemble
+- Criar um ensemble
+
+![](./.gitlab/demo/ensemble/ensemble-6.mp4)
+
+- Editar um ensemble
+
+![](./.gitlab/demo/ensemble/ensemble-5.mp4)
+
+- Deletar um ensemble
+
+![](./.gitlab/demo/ensemble/ensemble-4.mp4)
+
+- Editar um ensemble
+
+![](./.gitlab/demo/ensemble/ensemble-3.mp4)
+
+- Retornar todos os ensembles cadastrados
+
+![](./.gitlab/demo/ensemble/ensemble-2.mp4)
+
+- Retornar um ensemble por ID
+
+![](./.gitlab/demo/ensemble/ensemble-1.mp4)
+
+
+### Flashcards
+- Criar um flashcard
+
+![](./.gitlab/demo/flashcard/flashcard-5.mp4)
+
+- Editar um flashcard
+
+![](./.gitlab/demo/flashcard/flashcard-2.mp4)
+
+- Deletar um flashcard
+
+![](./.gitlab/demo/flashcard/flashcard-1.mp4)
+
+- Retornar todos os flashcards cadastrados
+
+![](./.gitlab/demo/flashcard/flashcard-4.mp4)
+
+- Retornar um flashcard por ID
+
+![](./.gitlab/demo/flashcard/flashcard-3.mp4)
+
+
+
+---
+## Tecnologias Utilizadas
+
+- Java
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+
+---
+## Desenvolvedores
+
+- Rinaldo Lira de Albuquerque Lima 
+- Rhuan Esteves
+- David Souza Santos
+- Gustavo Jesus da Silva

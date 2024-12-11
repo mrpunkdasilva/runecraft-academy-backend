@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="ar"
+                  name="API Reference" start-page="API_Reference.md">
+
+    <toc-element topic="API_Reference.md">
+        <toc-element topic="Schemas.md">
+            <toc-element topic="PurchaseRequestDTO.md"/>
+            <toc-element topic="PomodoroStoryRequestDTO.md"/>
+            <toc-element topic="FavoriteRequestDTO.md"/>
+            <toc-element topic="BoxRequestDTO.md"/>
+            <toc-element topic="GetByIdResponse.md"/>
+            <toc-element topic="ResponseCommonDTO.md"/>
+            <toc-element topic="ResponseUserEditDTO.md"/>
+            <toc-element topic="UserEditRequestDTO.md"/>
+            <toc-element topic="Flashcard.md"/>
+            <toc-element topic="FlashcardRequestDTO.md"/>
+            <toc-element topic="FlashcardRequestEditDTO.md"/>
+            <toc-element topic="Ensemble.md"/>
+            <toc-element topic="User.md"/>
+            <toc-element topic="EnsembleRequestDTO.md"/>
+            <toc-element topic="RegisterRequestDTO.md"/>
+            <toc-element topic="ResponseEntity.md"/>
+            <toc-element topic="HttpHeaders.md"/>
+            <toc-element topic="LoginRequestDTO.md"/>
+        </toc-element>
+        <toc-element topic="GET_purchase.md"/>
+        <toc-element topic="DELETE_purchase_purchaseId_.md"/>
+        <toc-element topic="POST_purchase_purchaseId_.md"/>
+        <toc-element topic="PUT_purchase_purchaseId_.md"/>
+        <toc-element topic="GET_purchase_purchaseId_.md"/>
+        <toc-element topic="GET_pomodoro_story.md"/>
+        <toc-element topic="POST_pomodoro_story_pomodoroStoryId_.md"/>
+        <toc-element topic="PUT_pomodoro_story_pomodoroStoryId_.md"/>
+        <toc-element topic="GET_pomodoro_story_pomodoroStoryId_.md"/>
+        <toc-element topic="POST_favorite.md"/>
+        <toc-element topic="GET_favorite.md"/>
+        <toc-element topic="DELETE_favorite_favoriteId_.md"/>
+        <toc-element topic="PUT_favorite_favoriteId_.md"/>
+        <toc-element topic="GET_favorite_favoriteId_.md"/>
+        <toc-element topic="GET_box_boxId_.md"/>
+        <toc-element topic="POST_box.md"/>
+        <toc-element topic="GET_box.md"/>
+        <toc-element topic="DELETE_box_favoriteId_.md"/>
+        <toc-element topic="PUT_box_favoriteId_.md"/>
+        <toc-element topic="GET_user.md"/>
+        <toc-element topic="DELETE_user_userId_.md"/>
+        <toc-element topic="PUT_user_userId_.md"/>
+        <toc-element topic="GET_user_userId_.md"/>
+        <toc-element topic="GET_flashcard_ensemble_ensemble_.md"/>
+        <toc-element topic="POST_flashcard.md"/>
+        <toc-element topic="GET_flashcard.md"/>
+        <toc-element topic="DELETE_flashcard_flashcardId_.md"/>
+        <toc-element topic="PUT_flashcard_flashcardId_.md"/>
+        <toc-element topic="GET_flashcard_flashcardId_.md"/>
+        <toc-element topic="POST_ensemble.md"/>
+        <toc-element topic="GET_ensemble.md"/>
+        <toc-element topic="DELETE_ensemble_ensembleId_.md"/>
+        <toc-element topic="PUT_ensemble_ensembleId_.md"/>
+        <toc-element topic="GET_ensemble_ensembleId_.md"/>
+        <toc-element topic="POST_auth_register.md"/>
+        <toc-element topic="POST_auth_login.md"/>
+    </toc-element>
+</instance-profile>
