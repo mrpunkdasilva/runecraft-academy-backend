@@ -1,7 +1,7 @@
 package org.punkdomus.runecraftacademy.infra.security;
 
-import org.punkdomus.runecraftacademy.models.User;
-import org.punkdomus.runecraftacademy.repository.UserRepository;
+import org.punkdomus.runecraftacademy.infra.repository.UserRepository;
+import org.punkdomus.runecraftacademy.data.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
